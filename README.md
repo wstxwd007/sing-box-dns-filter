@@ -1,7 +1,7 @@
-# 简单的 Sing-Box DNS 过滤器
+# 一个简单的 Sing-Box DNS 过滤器
 
 ## 简介
-一个简陋的 Sing-Box DNS 过滤器实现，个人使用。
+简陋的 Sing-Box DNS 过滤器实现，个人使用。
 
 ## 引用过滤器
 
@@ -42,18 +42,18 @@ OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用
         "outbound": "geosite-dnsblock",
         "server": "dns_block"
       }
-    ],
-    "route": {
-      "rule_set": [
-        {
-          "type": "remote",
-          "tag": "geosite-dnsblock",
-          "format": "binary",
-          "url": "https://github.com/tmby/sing-box-dns-filter/raw/refs/heads/main/geosite-dnsblock.srs",
-          "download_detour": "proxy"
-        }
-      ]
-    }
+    ]
+  },
+  "route": {
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geosite-dnsblock",
+        "format": "binary",
+        "url": "https://github.com/tmby/sing-box-dns-filter/raw/refs/heads/main/geosite-dnsblock.srs",
+        "download_detour": "proxy"
+      }
+    ]
   }
 }
 ```
