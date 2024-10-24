@@ -39,7 +39,7 @@ OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用
     ],
     "rules": [
       {
-        "outbound": "dnsblock",
+        "outbound": "geosite-dnsblock",
         "server": "dns_block"
       }
     ],
@@ -47,9 +47,9 @@ OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用
       "rule_set": [
         {
           "type": "remote",
-          "tag": "geosite-cn",
+          "tag": "geosite-dnsblock",
           "format": "binary",
-          "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/sing/geo/geosite/cn.srs",
+          "url": "https://github.com/tmby/sing-box-dns-filter/raw/refs/heads/main/geosite-dnsblock.srs",
           "download_detour": "proxy"
         }
       ]
