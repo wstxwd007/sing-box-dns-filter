@@ -1,0 +1,46 @@
+name: Build and Convert Filters
+
+on:
+  workflow_dispatch:  
+  schedule:
+    - cron: '0 0 * * *' 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          python3 -m pip install requests
+
+      - name: Download and Extract Sing-box
+        run: |
+          wget -O sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.10.1/sing-box-1.10.1-linux-amd64.tar.gz
+          tar -xzvf sing-box.tar.gz
+          chmod +x ./sing-box-1.10.1-linux-amd64/sing-box
+
+      - name: Run Python Script
+        run: python3 run.py
+
+      - name: Convert Using Sing-box
+        run: |
+          ./sing-box-1.10.1-linux-amd64/sing-box rule-set convert --type adguard --output geosite-dnsblock.srs ./temp_filters.txt
+
+      - name: Commit geosite-dnsblock.srs to Root Directory
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add geosite-dnsblock.srs
+          git commit -m "Add geosite-dnsblock.srs" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
