@@ -40,7 +40,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add geosite-dnsblock.srs
-          git commit -m "Add geosite-dnsblock.srs" || echo "No changes to commit"
+          git commit -m "Update geosite-dnsblock.srs" || echo "No changes to commit"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
