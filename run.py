@@ -1,7 +1,7 @@
 import requests
 
 urls = [
-    "https://github.com/AdguardTeam/FiltersRegistry/raw/refs/heads/master/filters/filter_15_DnsFilter/filter.txt",
+    "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt",
     "https://big.oisd.nl"
 ]
 
