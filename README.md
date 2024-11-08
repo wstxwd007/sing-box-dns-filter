@@ -39,7 +39,7 @@ OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用
     ],
     "rules": [
       {
-        "outbound": "geosite-dnsblock",
+        "rule_set": "geosite-dnsblock",
         "server": "dns_block"
       }
     ]
@@ -57,4 +57,30 @@ OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用
   }
 }
 ```
+
+1.11.0-alpha.7+
+```json
+{
+  "dns": {
+    "rules": [
+      {
+        "rule_set": "geosite-dnsblock",
+        "action": "reject"
+      }
+    ]
+  },
+  "route": {
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geosite-dnsblock",
+        "format": "binary",
+        "url": "https://github.com/tmby/sing-box-dns-filter/raw/refs/heads/main/geosite-dnsblock.srs",
+        "download_detour": "proxy"
+      }
+    ]
+  }
+}
+```
+
 通过上述配置，您可以在 Sing-Box 中实现基本的 DNS 过滤功能，提升网络安全与隐私保护。
