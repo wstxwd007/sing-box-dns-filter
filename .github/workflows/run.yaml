@@ -24,7 +24,7 @@ jobs:
 
       - name: Download and Extract Sing-box
         run: |
-          wget -O sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.10.1/sing-box-1.10.1-linux-amd64.tar.gz
+          wget -O sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.10.2/sing-box-1.10.2-linux-amd64.tar.gz
           tar -xzvf sing-box.tar.gz
           chmod +x ./sing-box-1.10.1-linux-amd64/sing-box
 
