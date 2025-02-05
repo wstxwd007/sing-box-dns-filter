@@ -24,16 +24,16 @@ jobs:
 
       - name: Download and Extract Sing-box
         run: |
-          wget -O sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.11.0/sing-box-1.11.0-linux-amd64.tar.gz
+          wget -O sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.11.1/sing-box-1.11.1-linux-amd64.tar.gz
           tar -xzvf sing-box.tar.gz
-          chmod +x ./sing-box-1.11.0-linux-amd64/sing-box
+          chmod +x ./sing-box-1.11.1-linux-amd64/sing-box
 
       - name: Run Python Script
         run: python3 run.py
 
       - name: Convert Using Sing-box
         run: |
-          ./sing-box-1.11.0-linux-amd64/sing-box rule-set convert --type adguard --output geosite-dnsblock.srs ./temp_filters.txt
+          ./sing-box-1.11.1-linux-amd64/sing-box rule-set convert --type adguard --output geosite-dnsblock.srs ./temp_filters.txt
 
       - name: Commit geosite-dnsblock.srs to Root Directory
         run: |
