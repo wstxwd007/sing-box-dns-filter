@@ -24,17 +24,17 @@ AdGuard DNS 过滤器包含多个过滤器，主要包括：
 
 [查看规则](https://github.com/AdguardTeam/AdGuardSDNSFilter)
 
-### ~~OISD 过滤器~~
+### OISD 过滤器
 
-~~OISD 阻止列表旨在防止设备连接到不必要或有害的域。其特点包括：~~
+OISD 阻止列表旨在防止设备连接到不必要或有害的域。其特点包括：
 
-- **~~减少广告~~**
+- **减少广告**
 
-- **~~降低恶意软件风险~~**
+- **降低恶意软件风险**
 
-- **~~提升隐私保护~~**
+- **提升隐私保护**
 
-~~OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用户反馈普遍良好。~~
+OISD 列表优先考虑功能性，适合在家庭、工作等场合使用，用户反馈普遍良好。
 
 [查看规则](https://oisd.nl)
 
@@ -70,8 +70,7 @@ AdGuard DNS 过滤器包含多个过滤器，主要包括：
         "type": "remote",
         "tag": "geosite-dnsblock",
         "format": "binary",
-        "url": "https://github.com/tmby/sing-box-dns-filter/raw/refs/heads/main/geosite-dnsblock.srs",
-        "download_detour": "proxy"
+        "url": "https://raw.githubusercontent.com/tmby/sing-box-dns-filter/refs/heads/main/geosite-dnsblock.srs"
       }
     ]
   }
@@ -96,8 +95,7 @@ AdGuard DNS 过滤器包含多个过滤器，主要包括：
         "type": "remote",
         "tag": "geosite-dnsblock",
         "format": "binary",
-        "url": "https://github.com/tmby/sing-box-dns-filter/raw/refs/heads/main/geosite-dnsblock.srs",
-        "download_detour": "proxy"
+        "url": "https://raw.githubusercontent.com/tmby/sing-box-dns-filter/refs/heads/main/geosite-dnsblock.srs"
       }
     ]
   }
