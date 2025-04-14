@@ -1,0 +1,64 @@
+name: Build and Convert Filters
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          python3 -m pip install requests
+
+      - name: Get Latest Sing-box Release
+        id: get_latest_release
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const result = await github.rest.repos.getLatestRelease({
+              owner: 'SagerNet',
+              repo: 'sing-box',
+            });
+            return result.data.tag_name;
+
+      - name: Download and Extract Sing-box
+        run: |
+          VERSION=${{ steps.get_latest_release.outputs.result }}
+          VERSION_NUMBER="${VERSION:1}"
+          SING_BOX_DIR="./sing-box-${VERSION_NUMBER}-linux-amd64"
+          wget -O sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/${VERSION}/sing-box-${VERSION_NUMBER}-linux-amd64.tar.gz || exit 1
+          tar -xzvf sing-box.tar.gz || exit 1
+          chmod +x "${SING_BOX_DIR}/sing-box"
+
+      - name: Run Python Script
+        run: python3 run.py
+
+      - name: Convert Using Sing-box
+        run: |
+          VERSION=${{ steps.get_latest_release.outputs.result }}
+          VERSION_NUMBER="${VERSION:1}"
+          SING_BOX_DIR="./sing-box-${VERSION_NUMBER}-linux-amd64"
+          "${SING_BOX_DIR}/sing-box" rule-set convert --type adguard --output geosite-dnsblock.srs ./temp_filters.txt
+
+      - name: Commit geosite-dnsblock.srs to Root Directory
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add geosite-dnsblock.srs
+          git commit -m "Update geosite-dnsblock.srs (using ${{ steps.get_latest_release.outputs.result }})" || echo "No changes to commit"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
